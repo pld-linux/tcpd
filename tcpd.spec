@@ -1,7 +1,7 @@
 Summary:	tcpd - full replacement for tcp_wrappers
 Summary(pl):	tcpd - pe³ny zamiennik tcp_wrappers
 Name:		tcpd
-Version:	0.1.0
+Version:	0.1.1
 Release:	1
 Group:		Networking/Admin
 Group(de):	Netzwerkwesen/Administration
