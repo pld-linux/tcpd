@@ -2,7 +2,7 @@ Summary:	tcpd - full replacement for tcp_wrappers
 Summary(pl):	tcpd - pe³ny zamiennik tcp_wrappers
 Name:		tcpd
 Version:	0.1.1
-Release:	1
+Release:	2
 License:	BSD-like
 Vendor:		PLD GNU/Linux Team ( http://www.pld.org.pl/ )
 Group:		Networking/Admin
@@ -38,6 +38,7 @@ Group(de):	Libraries
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Obsoletes:	libwrap
+Provides:	libwrap
 
 %description lib
 Full tcp_wrappers libwrap replacement with IPv6 support and other
