@@ -93,9 +93,6 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}
 
 touch $RPM_BUILD_ROOT%{_sysconfdir}/hosts.access
 
-gzip -9nf README NEWS AUTHORS COPYING ChangeLog \
-	doc/MEMO doc/hosts.access
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -104,7 +101,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc README NEWS AUTHORS COPYING ChangeLog doc/MEMO doc/hosts.access
 %attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man8/*
 
