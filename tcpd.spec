@@ -1,19 +1,18 @@
 Summary:	tcpd - full replacement for tcp_wrappers
 Summary(pl):	tcpd - pe³ny zamiennik tcp_wrappers
 Name:		tcpd
-Version:	0.1.1
-Release:	3
+Version:	0.2.0
+Release:	1
 License:	BSD-like
-Vendor:		PLD GNU/Linux Team ( http://www.pld.org.pl/ )
+Vendor:		PLD Linux Team ( http://www.pld-linux.org/ )
 Group:		Networking/Admin
-Source0:	ftp://ftp.pld.org.pl/software/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	93612c68b5eed5f3ee90422b82193d0a
-Patch0:		%{name}-SA_LEN.patch
+Source0:	ftp://ftp.pld.org.pl/software/%{name}/%{name}-%{version}.tar.bz2
+# Source0-md5:	ad0f15047c349dad98336e00fdb4f83e
 URL:		http://cvsweb.pld.org.pl/index.cgi/tcpd/
-BuildRequires:	autoconf
-BuildRequires:	automake
+BuildRequires:	autoconf >= 2.50
+BuildRequires:	automake >= 1.5
 BuildRequires:	libtool
-Prereq:		%{name}-lib = %{version}
+PreReq:		%{name}-lib = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_libexecdir	%{_sbindir}
@@ -36,8 +35,8 @@ oraz innych us³ug sieciowych.
 Summary:	libwrap replacement
 Summary(pl):	Zamiennik libwrap
 Group:		Libraries
-Obsoletes:	libwrap
 Provides:	libwrap
+Obsoletes:	libwrap
 
 %description lib
 Full tcp_wrappers libwrap replacement with IPv6 support and other
@@ -52,8 +51,8 @@ Summary:	Headers files and development library for tcp-lib
 Summary(pl):	Pliki nag³ówkowe i biblioteki do programowania
 Group:		Development/Libraries
 Requires:	%{name}-lib = %{version}
-Obsoletes:	libwrap-devel
 Provides:	libwrap-devel <= 7.6
+Obsoletes:	libwrap-devel
 
 %description devel
 Headers files and development library for tcpd-lib.
@@ -77,12 +76,13 @@ Biblioteka statyczna tcpd-lib.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure
 %{__make}
 
@@ -90,7 +90,8 @@ Biblioteka statyczna tcpd-lib.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 touch $RPM_BUILD_ROOT%{_sysconfdir}/hosts.access
 
@@ -102,7 +103,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README NEWS AUTHORS COPYING ChangeLog doc/MEMO doc/hosts.access
+%doc AUTHORS COPYING ChangeLog NEWS README TODO doc/MEMO doc/hosts.access
+%attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man8/*
 
