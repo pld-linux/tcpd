@@ -1,0 +1,14 @@
+--- ./include/tcpd.h.org	Fri Sep 28 16:26:19 2001
++++ ./include/tcpd.h	Fri Sep 28 16:27:09 2001
+@@ -23,6 +23,11 @@
+ 
+ #define TCPD_DEFAULT_RFC1413_TIMEOUT	30
+ 
++#ifndef SA_LEN
++#define SA_LEN(x) (((x)->sa_family == AF_INET6)?sizeof(struct sockaddr_in6): \
++	(((x)->sa_family == AF_INET)?sizeof(struct sockaddr_in):sizeof(struct sockaddr)))
++#endif
++	
+ #define STRING_UNKNOWN  "unknown"       /* lookup failed */
+ #define STRING_PARANOID "paranoid"      /* hostname conflict */
+ 
