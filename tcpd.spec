@@ -5,7 +5,7 @@ Version:	980106
 Release:	1
 Copyright:	Distributable
 Group:		Networking/Admin
-Group(pl):	Sieciowe/Administacyjne
+Group(pl):	Sieciowe/Administracja
 Vendor:		fujiwara@rcac.tdi.co.jp
 Source:		http://www.rcac.tdi.co.jp/fujiwara/%{name}-v6-0.0-%{version}.tar.gz
 Patch:		%{name}-linux.patch
@@ -60,5 +60,8 @@ rm -rf $RPM_BUILD_ROOT
 - new commenting style:
 
 $Log: tcpd.spec,v $
-Revision 1.1  1999-07-13 12:19:59  misiek
+Revision 1.2  1999-07-18 14:53:24  baggins
+- fixed bogus Group: field
+
+Revision 1.1  1999/07/13 12:19:59  misiek
 new spec
