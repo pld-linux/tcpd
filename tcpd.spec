@@ -107,7 +107,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files lib
 %defattr(644,root,root,755)
-%doc doc/*.gz
+%doc doc/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/hosts.access
 %{_mandir}/man5/*
