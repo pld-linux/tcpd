@@ -10,7 +10,7 @@ Vendor:		fujiwara@rcac.tdi.co.jp
 Source:		http://www.rcac.tdi.co.jp/fujiwara/%{name}-v6-0.0-%{version}.tar.gz
 Patch:		%{name}-linux.patch
 URL:		http://www.rcac.tdi.co.jp/fujiwara/
-Buildroot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Conflicts:	tcp_wrapper
 Conflicts:	libwrap-static
 
@@ -43,7 +43,6 @@ install -s tcpd tcpd_check	$RPM_BUILD_ROOT%{_sbindir}
 install tcpd.h			$RPM_BUILD_ROOT%{_includedir}
 install hosts.access		$RPM_BUILD_ROOT/etc
 
-
 gzip -9nf MEMO README.txt hosts.access
 
 %clean
@@ -60,7 +59,13 @@ rm -rf $RPM_BUILD_ROOT
 - new commenting style:
 
 $Log: tcpd.spec,v $
-Revision 1.2  1999-07-18 14:53:24  baggins
+Revision 1.3  2000-04-01 11:15:42  zagrodzki
+- changed all BuildRoot definitons
+- removed all applnkdir defs
+- changed some prereqs/requires
+- removed duplicate empty lines
+
+Revision 1.2  1999/07/18 14:53:24  baggins
 - fixed bogus Group: field
 
 Revision 1.1  1999/07/13 12:19:59  misiek
