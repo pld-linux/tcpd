@@ -2,13 +2,14 @@ Summary:	tcpd - full replacement for tcp_wrappers
 Summary(pl):	tcpd - pe³ny zamiennik tcp_wrappers
 Name:		tcpd
 Version:	0.1.1
-Release:	2
+Release:	3
 License:	BSD-like
 Vendor:		PLD GNU/Linux Team ( http://www.pld.org.pl/ )
 Group:		Networking/Admin
 Group(de):	Netzwerkwesen/Administration
 Group(pl):	Sieciowe/Administacyjne
 Source0:	ftp://ftp.pld.org.pl/software/%{name}/%{name}-%{version}.tar.gz
+Patch0:		%{name}-SA_LEN.patch
 URL:		http://cvsweb.pld.org.pl/index.cgi/tcpd/
 PreReq:		%{name}-lib
 Requires:	%{name}-lib = %{version}
@@ -84,8 +85,12 @@ Biblioteka statyczna tcpd-lib.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
+libtoolize --copy --force
+aclocal
+autoconf
 %configure
 make
 
