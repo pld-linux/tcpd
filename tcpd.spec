@@ -7,12 +7,14 @@ License:	BSD-like
 Vendor:		PLD GNU/Linux Team ( http://www.pld.org.pl/ )
 Group:		Networking/Admin
 Group(de):	Netzwerkwesen/Administration
-Group(pl):	Sieciowe/Administacyjne
+Group(pl):	Sieciowe/Administracyjne
 Source0:	ftp://ftp.pld.org.pl/software/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-SA_LEN.patch
 URL:		http://cvsweb.pld.org.pl/index.cgi/tcpd/
-PreReq:		%{name}-lib
-Requires:	%{name}-lib = %{version}
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool
+Prereq:		%{name}-lib = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_libexecdir	%{_sbindir}
@@ -36,8 +38,12 @@ Summary:	libwrap replacement
 Summary(pl):	Zamiennik libwrap
 Group:		Libraries
 Group(de):	Libraries
+Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	Библиотеки
+Group(uk):	Б╕бл╕отеки
 Obsoletes:	libwrap
 Provides:	libwrap
 
@@ -54,8 +60,12 @@ Summary:	Headers files and development library for tcp-lib
 Summary(pl):	Pliki nagЁСwkowe i biblioteki do programowania
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-lib = %{version}
 Obsoletes:	libwrap-devel
 Provides:	libwrap-devel <= 7.6
@@ -68,12 +78,16 @@ Pliki nagЁСwkowe i biblioteki do programowania z u©yciem biblioteki
 tcpd-lib.
 
 %package static
-Summary:	Static library
-Summary(pl):	Biblioteka statyczna
+Summary:	tcpd static library
+Summary(pl):	Biblioteka statyczna tcpd
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 Obsoletes:	libwrap-static <= 7.6
 
@@ -92,7 +106,7 @@ libtoolize --copy --force
 aclocal
 autoconf
 %configure
-make
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -105,11 +119,11 @@ touch $RPM_BUILD_ROOT%{_sysconfdir}/hosts.access
 gzip -9nf README NEWS AUTHORS COPYING ChangeLog \
 	doc/MEMO doc/hosts.access
 
-%post 	lib -p /sbin/ldconfig
-%postun lib -p /sbin/ldconfig
-
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post 	lib -p /sbin/ldconfig
+%postun lib -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
