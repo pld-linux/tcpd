@@ -1,55 +1,119 @@
-Summary:	Another security wrapper for tcp daemons
-Summary(pl):	Inny wrapper bezpieczeñstwa dla demonów tcp
+Summary:	tcpd - full replacement for tcp_wrappers
+Summary(pl):	tcpd - pe³ny zamiennik tcp_wrappers
 Name:		tcpd
-Version:	980106
+Version:	0.0.2
 Release:	1
-Copyright:	Distributable
 Group:		Networking/Admin
-Group(pl):	Sieciowe/Administracyjne
-Vendor:		fujiwara@rcac.tdi.co.jp
-Source0:	http://www.rcac.tdi.co.jp/fujiwara/%{name}-v6-0.0-%{version}.tar.gz
-Patch0:		%{name}-linux.patch
-URL:		http://www.rcac.tdi.co.jp/fujiwara/
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Conflicts:	tcp_wrapper
-Conflicts:	libwrap-static
+Group(pl):	Sieciowe/Administracja
+License:	BSD-like
+Vendor:		PLD GNU/Linux Team ( http://www.pld.org.pl/ )
+URL:		http://cvsweb.pld.org.pl/index.cgi/tcpd/
+Source0:	ftp://ftp.pld.org.pl/software/%{name}/%{name}-%{version}.tar.gz
+PreReq:		%{name}-lib
+Requires:	%{name}-lib = %{version}
+BuildRoot:	/tmp/%{name}-%{version}-root
+
+%define		_libexecdir	%{_sbindir}
 
 %description
-With this package you can monitor and filter incoming requests for the
-SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK, and other
-network services. It is replacement for tcp_wrappers. It support both
-- IPv4 and IPv6.
+The %{name} package provides small daemon programs which can
+monitor and filter incoming requests for systat, finger, FTP, telnet,
+ssh, rlogin, rsh, exec, tftp, talk and other network services.
+
+Install the %{name} program if you need a security tool for
+filtering incoming network services requests.
 
 %description -l pl
-Z tym pakietem mo¿esz monitorowaæ i filtrowaæ nadchodz±ce pro¶by do
-SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK, i innych
-us³ug sieciowych. tcpd mo¿e zast±piæ tcp_wrappers. tcpd wspiera
-zarówno IPv4 jak i IPv6.
+Pakiet %{name} dostarcza niewielki program, który pozwala na monitorowanie
+oraz filtrowania nadchodz±cych po³±czeñ do us³ug takich jak systat, finger,
+FTP, telnet, ssh, rlogin, rsh, exec, tftp, talk oraz innych us³ug sieciowych.
+
+%package lib
+Summary:	libwrap replacement
+Summary(pl):	Zamiennik libwrap
+Group:		Libraries
+Group(pl):	Biblioteki
+Obsoletes:	libwrap
+
+%description lib
+Full tcp_wrappers libwrap replacement with IPv6 support
+and other features.
+
+%description lib -l pl
+Pe³ny zamiennik biblioteki libwrap pochodz±cej z pakietu tcp_wrappers.
+Zamiennik oferuje ponadto wsparcie dla IPv6 i inne dodatki.
+
+%package devel
+Summary:	Headers files and development library for tcp-lib
+Summary(pl):	Pliki nag³ówkowe i biblioteki do programowania
+Group:		Development/Libraries
+Group(pl):	Programowanie/Biblioteki
+Requires:	%{name}-lib = %{version}
+Obsoletes:	libwrap-devel
+Provides:	libwrap-devel <= 7.6
+
+%description devel
+Headers files and development library for tcpd-lib.
+
+%description devel -l pl
+Pliki nag³ówkowe i biblioteki do programowania
+z u¿yciem biblioteki tcpd-lib.
+
+%package static
+Summary:	Static library
+Summary(pl):	Biblioteka statyczna
+Group:		Development/Libraries
+Group(pl):	Programowanie/Biblioteki
+Requires:	%{name}-devel = %{version}
+Obsoletes:	libwrap-static <= 7.6
+
+%description static
+Static library tcpd-lib.
+
+%description static -l pl
+Biblioteka statyczna tcpd-lib.
 
 %prep
-%setup -q -n %{name}
-%patch -p1
+%setup -q
 
 %build
-OPT="$RPM_OPT_FLAGS" make
+LDFLAGS="-s"; export LDFLAGS
+%configure
+make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir} \
-	$RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{_sbindir}}
 
-install libwrap.a $RPM_BUILD_ROOT%{_libdir}
-install -s tcpd tcpd_check $RPM_BUILD_ROOT%{_sbindir}
-install tcpd.h $RPM_BUILD_ROOT%{_includedir}
-install hosts.access $RPM_BUILD_ROOT%{_sysconfdir}
+make install DESTDIR=$RPM_BUILD_ROOT
 
-gzip -9nf MEMO README.txt hosts.access
+gzip -9fn $RPM_BUILD_ROOT%{_mandir}/man*/* \
+	README NEWS AUTHORS COPYING ChangeLog \
+	doc/MEMO doc/hosts.access
+
+%post 	lib -p /sbin/ldconfig
+%postun lib -p /sbin/ldconfig
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc *.gz doc/*.gz
 %attr(755,root,root) %{_sbindir}/*
-%attr(644,root,root) %config %verify(not md5 mtime size) %{_sysconfdir}/hosts.*
+%{_mandir}/man8/*
+
+%files lib
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%{_mandir}/man5/*
+
+%files devel
+%defattr(644,root,root,755)
+%{_includedir}/*
+%{_libdir}/lib*.so
+%{_libdir}/lib*.la
+%{_mandir}/man3/*
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/lib*.a
