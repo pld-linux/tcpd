@@ -5,7 +5,7 @@ Version:	980106
 Release:	1
 Copyright:	Distributable
 Group:		Networking/Admin
-Group(pl):	Sieciowe/Administracja
+Group(pl):	Sieciowe/Administracyjne
 Vendor:		fujiwara@rcac.tdi.co.jp
 Source:		http://www.rcac.tdi.co.jp/fujiwara/%{name}-v6-0.0-%{version}.tar.gz
 Patch:		%{name}-linux.patch
@@ -59,7 +59,10 @@ rm -rf $RPM_BUILD_ROOT
 - new commenting style:
 
 $Log: tcpd.spec,v $
-Revision 1.3  2000-04-01 11:15:42  zagrodzki
+Revision 1.4  2000-05-05 15:06:01  mis
+- Group: synced with PLD groups
+
+Revision 1.3  2000/04/01 11:15:42  zagrodzki
 - changed all BuildRoot definitons
 - removed all applnkdir defs
 - changed some prereqs/requires
