@@ -6,9 +6,9 @@ Release:	1
 License:	BSD-like
 Vendor:		PLD Linux Team ( http://www.pld-linux.org/ )
 Group:		Networking/Admin
-Source0:	ftp://ftp.pld.org.pl/software/%{name}/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.pld-linux.org/software/%{name}/%{name}-%{version}.tar.bz2
 # Source0-md5:	ad0f15047c349dad98336e00fdb4f83e
-URL:		http://cvsweb.pld.org.pl/index.cgi/tcpd/
+URL:		http://cvs.pld-linux.org/tcpd/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1.5
 BuildRequires:	libtool
