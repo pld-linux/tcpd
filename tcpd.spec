@@ -81,7 +81,7 @@ Biblioteka statyczna tcpd-lib.
 %build
 libtoolize --copy --force
 aclocal
-autoconf
+%{__autoconf}
 %configure
 %{__make}
 
