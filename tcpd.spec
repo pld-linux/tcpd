@@ -4,40 +4,44 @@ Name:		tcpd
 Version:	0.0.2
 Release:	1
 Group:		Networking/Admin
-Group(pl):	Sieciowe/Administracja
+Group(de):	Netzwerkwesen/Administration
+Group(pl):	Sieciowe/Administacyjne
 License:	BSD-like
 Vendor:		PLD GNU/Linux Team ( http://www.pld.org.pl/ )
 URL:		http://cvsweb.pld.org.pl/index.cgi/tcpd/
 Source0:	ftp://ftp.pld.org.pl/software/%{name}/%{name}-%{version}.tar.gz
 PreReq:		%{name}-lib
 Requires:	%{name}-lib = %{version}
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_libexecdir	%{_sbindir}
 
 %description
-The %{name} package provides small daemon programs which can
-monitor and filter incoming requests for systat, finger, FTP, telnet,
-ssh, rlogin, rsh, exec, tftp, talk and other network services.
+The %{name} package provides small daemon programs which can monitor
+and filter incoming requests for systat, finger, FTP, telnet, ssh,
+rlogin, rsh, exec, tftp, talk and other network services.
 
-Install the %{name} program if you need a security tool for
-filtering incoming network services requests.
+Install the %{name} program if you need a security tool for filtering
+incoming network services requests.
 
 %description -l pl
-Pakiet %{name} dostarcza niewielki program, który pozwala na monitorowanie
-oraz filtrowania nadchodz±cych po³±czeñ do us³ug takich jak systat, finger,
-FTP, telnet, ssh, rlogin, rsh, exec, tftp, talk oraz innych us³ug sieciowych.
+Pakiet %{name} dostarcza niewielki program, który pozwala na
+monitorowanie oraz filtrowania nadchodz±cych po³±czeñ do us³ug takich
+jak systat, finger, FTP, telnet, ssh, rlogin, rsh, exec, tftp, talk
+oraz innych us³ug sieciowych.
 
 %package lib
 Summary:	libwrap replacement
 Summary(pl):	Zamiennik libwrap
 Group:		Libraries
+Group(de):	Libraries
+Group(fr):	Librairies
 Group(pl):	Biblioteki
 Obsoletes:	libwrap
 
 %description lib
-Full tcp_wrappers libwrap replacement with IPv6 support
-and other features.
+Full tcp_wrappers libwrap replacement with IPv6 support and other
+features.
 
 %description lib -l pl
 Pe³ny zamiennik biblioteki libwrap pochodz±cej z pakietu tcp_wrappers.
@@ -47,6 +51,8 @@ Zamiennik oferuje ponadto wsparcie dla IPv6 i inne dodatki.
 Summary:	Headers files and development library for tcp-lib
 Summary(pl):	Pliki nag³ówkowe i biblioteki do programowania
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-lib = %{version}
 Obsoletes:	libwrap-devel
@@ -56,13 +62,15 @@ Provides:	libwrap-devel <= 7.6
 Headers files and development library for tcpd-lib.
 
 %description devel -l pl
-Pliki nag³ówkowe i biblioteki do programowania
-z u¿yciem biblioteki tcpd-lib.
+Pliki nag³ówkowe i biblioteki do programowania z u¿yciem biblioteki
+tcpd-lib.
 
 %package static
 Summary:	Static library
 Summary(pl):	Biblioteka statyczna
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
 Obsoletes:	libwrap-static <= 7.6
@@ -77,17 +85,15 @@ Biblioteka statyczna tcpd-lib.
 %setup -q
 
 %build
-LDFLAGS="-s"; export LDFLAGS
 %configure
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-make install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-gzip -9fn $RPM_BUILD_ROOT%{_mandir}/man*/* \
-	README NEWS AUTHORS COPYING ChangeLog \
+gzip -9nf README NEWS AUTHORS COPYING ChangeLog \
 	doc/MEMO doc/hosts.access
 
 %post 	lib -p /sbin/ldconfig
