@@ -7,6 +7,7 @@ License:	BSD-like
 Vendor:		PLD GNU/Linux Team ( http://www.pld.org.pl/ )
 Group:		Networking/Admin
 Source0:	ftp://ftp.pld.org.pl/software/%{name}/%{name}-%{version}.tar.gz
+# Source0-md5:	93612c68b5eed5f3ee90422b82193d0a
 Patch0:		%{name}-SA_LEN.patch
 URL:		http://cvsweb.pld.org.pl/index.cgi/tcpd/
 BuildRequires:	autoconf
