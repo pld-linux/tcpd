@@ -3,13 +3,13 @@ Summary(pl):	tcpd - pe³ny zamiennik tcp_wrappers
 Name:		tcpd
 Version:	0.1.1
 Release:	1
+License:	BSD-like
+Vendor:		PLD GNU/Linux Team ( http://www.pld.org.pl/ )
 Group:		Networking/Admin
 Group(de):	Netzwerkwesen/Administration
 Group(pl):	Sieciowe/Administacyjne
-License:	BSD-like
-Vendor:		PLD GNU/Linux Team ( http://www.pld.org.pl/ )
-URL:		http://cvsweb.pld.org.pl/index.cgi/tcpd/
 Source0:	ftp://ftp.pld.org.pl/software/%{name}/%{name}-%{version}.tar.gz
+URL:		http://cvsweb.pld.org.pl/index.cgi/tcpd/
 PreReq:		%{name}-lib
 Requires:	%{name}-lib = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -115,9 +115,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.la
 %{_includedir}/*
-%{_libdir}/lib*.so
-%{_libdir}/lib*.la
 %{_mandir}/man3/*
 
 %files static
