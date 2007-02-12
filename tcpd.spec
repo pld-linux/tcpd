@@ -1,5 +1,5 @@
 Summary:	tcpd - full replacement for tcp_wrappers
-Summary(pl):	tcpd - pe≥ny zamiennik tcp_wrappers
+Summary(pl.UTF-8):   tcpd - pe≈Çny zamiennik tcp_wrappers
 Name:		tcpd
 Version:	0.2.0
 Release:	1
@@ -25,15 +25,15 @@ rlogin, rsh, exec, tftp, talk and other network services.
 Install the %{name} program if you need a security tool for filtering
 incoming network services requests.
 
-%description -l pl
-Pakiet %{name} dostarcza niewielki program, ktÛry pozwala na
-monitorowanie oraz filtrowania nadchodz±cych po≥±czeÒ do us≥ug takich
+%description -l pl.UTF-8
+Pakiet %{name} dostarcza niewielki program, kt√≥ry pozwala na
+monitorowanie oraz filtrowania nadchodzƒÖcych po≈ÇƒÖcze≈Ñ do us≈Çug takich
 jak systat, finger, FTP, telnet, ssh, rlogin, rsh, exec, tftp, talk
-oraz innych us≥ug sieciowych.
+oraz innych us≈Çug sieciowych.
 
 %package lib
 Summary:	libwrap replacement
-Summary(pl):	Zamiennik libwrap
+Summary(pl.UTF-8):   Zamiennik libwrap
 Group:		Libraries
 Provides:	libwrap
 Obsoletes:	libwrap
@@ -42,13 +42,13 @@ Obsoletes:	libwrap
 Full tcp_wrappers libwrap replacement with IPv6 support and other
 features.
 
-%description lib -l pl
-Pe≥ny zamiennik biblioteki libwrap pochodz±cej z pakietu tcp_wrappers.
+%description lib -l pl.UTF-8
+Pe≈Çny zamiennik biblioteki libwrap pochodzƒÖcej z pakietu tcp_wrappers.
 Zamiennik oferuje ponadto wsparcie dla IPv6 i inne dodatki.
 
 %package devel
 Summary:	Headers files and development library for tcp-lib
-Summary(pl):	Pliki nag≥Ûwkowe i biblioteki do programowania
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe i biblioteki do programowania
 Group:		Development/Libraries
 Requires:	%{name}-lib = %{version}
 Provides:	libwrap-devel <= 7.6
@@ -57,13 +57,13 @@ Obsoletes:	libwrap-devel
 %description devel
 Headers files and development library for tcpd-lib.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe i biblioteki do programowania z uøyciem biblioteki
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe i biblioteki do programowania z u≈ºyciem biblioteki
 tcpd-lib.
 
 %package static
 Summary:	tcpd static library
-Summary(pl):	Biblioteka statyczna tcpd
+Summary(pl.UTF-8):   Biblioteka statyczna tcpd
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}
 Obsoletes:	libwrap-static <= 7.6
@@ -71,7 +71,7 @@ Obsoletes:	libwrap-static <= 7.6
 %description static
 Static library tcpd-lib.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteka statyczna tcpd-lib.
 
 %prep
