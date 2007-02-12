@@ -1,5 +1,5 @@
 Summary:	tcpd - full replacement for tcp_wrappers
-Summary(pl.UTF-8):   tcpd - pełny zamiennik tcp_wrappers
+Summary(pl.UTF-8):	tcpd - pełny zamiennik tcp_wrappers
 Name:		tcpd
 Version:	0.2.0
 Release:	1
@@ -33,7 +33,7 @@ oraz innych usług sieciowych.
 
 %package lib
 Summary:	libwrap replacement
-Summary(pl.UTF-8):   Zamiennik libwrap
+Summary(pl.UTF-8):	Zamiennik libwrap
 Group:		Libraries
 Provides:	libwrap
 Obsoletes:	libwrap
@@ -48,7 +48,7 @@ Zamiennik oferuje ponadto wsparcie dla IPv6 i inne dodatki.
 
 %package devel
 Summary:	Headers files and development library for tcp-lib
-Summary(pl.UTF-8):   Pliki nagłówkowe i biblioteki do programowania
+Summary(pl.UTF-8):	Pliki nagłówkowe i biblioteki do programowania
 Group:		Development/Libraries
 Requires:	%{name}-lib = %{version}
 Provides:	libwrap-devel <= 7.6
@@ -63,7 +63,7 @@ tcpd-lib.
 
 %package static
 Summary:	tcpd static library
-Summary(pl.UTF-8):   Biblioteka statyczna tcpd
+Summary(pl.UTF-8):	Biblioteka statyczna tcpd
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}
 Obsoletes:	libwrap-static <= 7.6
